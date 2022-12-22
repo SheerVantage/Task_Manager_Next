@@ -4,8 +4,10 @@
 /node_modules
 /.pnp
 /.next
+/out
 .pnp.js
 .eslintrc.json
+/**/backups
 
 # testing
 /coverage

@@ -26,3 +26,8 @@ a {
     background: black;
   }
 }
+.pc-1 > *:not(.p-0) { padding: 0.25rem; }
+.pcx-1 > *:not(.p-0) { padding-inline: 0.25rem; }
+.pc-2 > *:not(.p-0) { padding: 0.5rem; }
+.pcx-2 > *:not(.p-0) { padding-inline: 0.5rem; }
+.bc-1 *:is(input, textarea, select) {border: 1px dotted currentColor}

@@ -1,0 +1,5 @@
+[
+    { "label": "Home", "url": "/" },
+    { "label": "Task List", "url": "/firstpage" },
+    { "label": "Task Detail", "url": "/secondpage" }
+]

@@ -1,0 +1,5 @@
+[
+    {"name":"The very first task", "status":"pending", "duration":"2.5 hours"}, 
+    {"name":"another task", "status":"done", "duration":"30 minutes"}, 
+    {"name": "The second task after that", "status":"in progress", "duration":"5 hours"}
+]

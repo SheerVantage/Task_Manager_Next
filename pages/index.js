@@ -1,26 +1,31 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { useState } from 'react'
-import Link from 'next/link';
 
-export default function Home() {
-  let [tasks, setTasks] = useState(['first', 'second', 'third', 'fourth'])
-  let [index, setIndex] = useState(0)
+import { useSelector, useDispatch } from 'react-redux'
+import * as slice from '../lib/Slice'
+let { actions } = slice
+import ToolBar from '../components/ToolBar' 
+import Lister from '../components/Lister'
+import { useEffect } from 'react'
+import Menu from '../components/Menu'
 
-  function addTask(){
-    setIndex(index + 1)
-    setTasks([...tasks, 'new task ' + index])
-  }
+function Index() {
+  let tasks = useSelector(state=> state.data.tasks)//[{ID:1, Name:'First Task'}, {ID:2, Name:'The Second Task'}]
+  const dispatch = useDispatch()
+  useEffect( ()=>{
+    fetch('./api/data?e=Task&a=GetRecords').then(async r=>{
+      let rows = await r.json()
+      dispatch( actions.setTasks( rows ) )
+    })
+  }, [] )
 
   return (
-    <div className={styles.container}>
-      <h1 className = "styles.code">The list of tasks <button onClick = {addTask}>Add</button></h1>
-      <ul className='bg-green-200'>
-        {tasks.map( task => {
-          return <li key = {task}>{task} <Link href = {'/detail?name='+task} className = "bg-red-500 border-2">🡥</Link></li>
-        } )}
-      </ul>
+    <div className='flex p-5'>
+      <Menu/>
+      <div className='w-full p-1 sm:p-0 md:w-4/5 lg:w-3/5 mx-auto grid h-full overflow-y-auto' styles = 'grid-template-rows: 30px 1fr;'>
+        <ToolBar className = "mb-2"></ToolBar>
+        <Lister list = {tasks} columns = {['Name', 'Date', 'Status', 'Particulars']}></Lister>
+      </div>
     </div>
   )
 }
+
+export default Index
